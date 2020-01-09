@@ -9,10 +9,12 @@ func deduplicate(strings []string) []string {
 	}
 
 	var result []string
+
+	// 최초로 중복된 지점을 찾는다 (최초로 중복되는곳 이전까지 수정 할 필요 없음)
 	before := strings[0]
 	for i, s := range strings[1:] {
 		if before == s {
-			result = strings[:i+1]
+			result = strings[:i+1] // 앞부분은 기존 내부 배열 사용
 			break
 		}
 		before = s
@@ -21,6 +23,7 @@ func deduplicate(strings []string) []string {
 		return strings
 	}
 
+	// 중복되지 않는 string 을 하나씩 result 에 추가
 	for i := len(result) + 1; i < length; i++ {
 		s := strings[i]
 		if before != s {
